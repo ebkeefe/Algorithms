@@ -1,0 +1,75 @@
+//*******************************************************************
+// Welcome to CompileJava!
+// If you experience any issues, please contact us ('More Info')  -->
+// Also, sorry that the "Paste" feature no longer works! GitHub broke
+// this (so we'll switch to a new provider): https://blog.github.com\
+// /2018-02-18-deprecation-notice-removing-anonymous-gist-creation/
+//*******************************************************************
+
+import java.lang.Math; // headers MUST be above the first class
+import java.util.*;
+
+// one class needs to have a main() method
+public class HelloWorld
+{
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {
+     BaseConversion converter = new BaseConversion();
+     String answer = converter.convert(16, "ABCD", 2);
+     System.out.println(answer);
+  }
+}
+
+// you can add other public classes to this editor in any order
+public class BaseConversion
+{
+  
+  Hashtable<Integer, String> ht = new Hashtable<Integer, String>();
+  
+  public BaseConversion(){
+    ht.put(10, "A");
+    ht.put(11, "B");
+    ht.put(12, "C");
+    ht.put(13, "D");
+    ht.put(14, "E");
+    ht.put(15, "F");
+  }
+  
+  
+  public String convert(int b1, String input, int b2)
+  {
+    //first conver to base 10
+    //System.out.println("input is: " + input);
+    int sum = 0;
+    for (int i = 0; i < input.length(); i++){
+    	Character current = input.charAt(i);
+     	
+      	int digit = Character.getNumericValue(current);
+        //System.out.println("current digit is: " + digit);
+      
+        sum += digit*Math.pow(b1, i);
+    }
+    
+    //System.out.println(sum);
+    
+    //then convert to base b2
+    String answer = "";
+    while (true){
+      int current = sum % b2;
+      if (current >= 10){
+        answer = answer + ht.get(current);
+        	
+      }else{
+      	answer = answer + Integer.toString(current);
+      }
+        sum = sum/b2;
+      if (sum == 0){break;}
+             
+    
+    }
+    
+    return answer;
+      
+  }
+}
