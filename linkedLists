@@ -1,0 +1,77 @@
+
+
+import java.lang.Math; // headers MUST be above the first class
+import java.util.*;
+
+
+public class checkLoops
+{
+  
+  public static void main(String[] args)
+  {
+    Node weird = new Node("first", null);
+    Node weird2 = new Node("second", weird);
+    weird.setNext(weird2);
+  	Node head = new Node("first", weird);
+    Node cycleStart = printList(head);
+    if (cycleStart == null){
+      System.out.println("No cycles");
+    }else{
+    	System.out.println("The node starting the cycle is: " + cycleStart.getName());
+    }
+  }
+
+
+  public static Node printList(Node head){
+    HashSet <Node> usedNodes = new HashSet<Node>();
+    Node current = head;
+    while (true){
+      if (current == null){
+        return null;
+      }
+      
+      String name = current.getName();
+      
+      Node next = current.getNode();
+      
+      
+      
+      System.out.println("Node: " + name);
+      current = next;
+      
+      if (usedNodes.add(current)){
+        System.out.println("adding to used set!!!");
+      }else{
+      	return next;
+      }
+      
+    }
+    //return null;
+  }
+  
+}
+
+
+public class Node{
+
+  private Node next;
+  private String name;
+  
+  public Node(String n, Node nextNode){
+    next = nextNode;
+    name = n;
+  }
+  
+  public String getName(){
+    return this.name;
+  }
+  
+  public Node getNode(){
+  	return this.next;
+  }
+  
+  public void setNext(Node nextNode){
+  	next = nextNode;
+  }
+
+}
