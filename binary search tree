@@ -1,0 +1,112 @@
+import java.lang.Math; // headers MUST be above the first class
+
+// one class needs to have a main() method
+public class HelloWorld
+{
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {
+    BST myTree = new BST(new BSTNode(10, null, null));
+    myTree.put(5);
+    myTree.put(7);
+    myTree.put(14);
+    myTree.put(2);
+    myTree.put(20);
+    myTree.put(1);
+    myTree.put(100);
+    
+    
+    
+    System.out.println(myTree.toString());
+    
+  }
+}
+
+// you can add other public classes to this editor in any order
+public class BST
+{
+	
+  private BSTNode head;
+  
+  public BST(BSTNode head){
+    this.head = head;
+  }
+  
+  public String toString(BSTNode input){
+    if (input == null){return "leaf";}
+  	return ("ITEM: " + Integer.toString(input.getItem()) + " left: " + this.toString(input.getLeft()) + " right: " + this.toString(input.getRight()));
+  
+  }  
+  
+  public String toString(){
+  	return this.toString(head);
+  }
+  
+  public void put(int input){
+    this.head.put(input);
+  }
+  
+  
+  
+ 
+  
+  
+}
+
+public class BSTNode{
+  
+  private int item;
+  private BSTNode left, right;
+  
+  public BSTNode(int item, BSTNode left, BSTNode right){
+  	this.item = item;
+    this.left = left;
+    this.right = right;
+  }
+  
+  public int getItem(){
+  	return item;
+  }
+  
+  public BSTNode getLeft(){
+    return this.left;
+  }
+  
+  public BSTNode getRight(){
+    return this.right;
+  }
+  
+  public void put(int input){
+    int current = this.getItem();
+    BSTNode left = this.getLeft();
+    BSTNode right = this.getRight();
+    
+    if (input < current){
+      if (left == null){
+      	this.left = new BSTNode(input, null, null);
+      }else{
+      	left.put(input);
+      }
+      
+    }else if (input > current){
+      if (right == null){
+        this.right = new BSTNode(input, null, null);
+      }else{
+        right.put(input);
+      }
+    }else{
+    	System.out.println("can't put a duplicate element in the tree");
+    }
+    
+    
+  }
+  
+  
+ 
+  
+ 
+  
+ 
+  
+  
+}
