@@ -1,0 +1,92 @@
+import java.lang.Math; // headers MUST be above the first class
+
+// one class needs to have a main() method
+public class HelloWorld
+{
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {
+    int[][] test1 = {{4, 8, 10, 12, 2},
+  						{7, 2, 4, 1, 8},
+                          {1, 5, 20, 100, 2},
+                          {3, 6, 1, 5, 7},
+                          {1, 10, 3, 2, 4}
+                          
+  						};
+      
+    printMatrix(test1);
+    
+    FlipMatrix myFlipper = new FlipMatrix();
+    int[][] answer = myFlipper.flip(test1);
+    printMatrix(answer);
+    
+    
+  }
+  
+  public static void printMatrix(int[][] input){
+    if (input == null){
+      System.out.println("empty");
+      return;
+    }
+    String answer = "";
+    for (int i = 0; i < input.length; i++){
+      for (int j = 0; j < input[i].length; j++){
+      	answer = answer + input[i][j] + " ";
+      }
+      answer = answer + "\n";
+    }
+    System.out.println(answer);
+  
+  }
+}
+
+// you can add other public classes to this editor in any order
+public class FlipMatrix
+{
+  
+  public FlipMatrix()
+  {
+    
+  }
+  
+  
+  
+  
+  public int[][] flip(int[][] input)
+  {
+    if (input[0].length != input.length){
+      System.out.println("this is not a square matrix!");
+      return null;
+    }
+    int layers = input[0].length/2;
+    
+    for (int layer = 0; layer < layers; layer++){
+      
+      int first = layer;
+      int last = input[0].length - layer - 1;
+      
+      System.out.println("first is: " + first);
+      System.out.println("last is: " + last);
+      System.out.println("layer is: " + layer);
+      
+      for (int i = first; i < last; i ++){
+      	
+        
+        int a = input[first][i];
+        int b = input[last-i + layer][first];
+        int c = input[last][last - i + layer];
+        int d = input[i][last];
+        
+        input[first][i] = d;
+        input[last-i + layer][first] = a;
+        input[last][last - i + layer] = b;
+        input[i][last] = c;
+        
+      }
+    }
+    
+    return input;
+    
+    
+  }
+}
